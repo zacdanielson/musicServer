@@ -1,0 +1,29 @@
+ <!DOCTYPE html> 
+ <html> 
+ <head> 
+ <title>
+	 Comments!
+ </title> 
+ <script src="https://code.jquery.com/jquery-1.10.2.js">
+ </script> 
+ <script src="javascripts/songs.js">
+ </script> 
+ </head> 
+ <body> 
+ <form id="songForm" action=""> 
+	<label for="track">track: </label><input type="number" id="track" placeholder="track"><br> 
+ 	<label for="title">title: </label><input type="text" id="title" placeholder="title"><br> 
+ 	<label for="artist">artist: </label><input type="text" id="artist" placeholder="artist"><br> 
+ 	<label for="album">album: </label><input type="text" id="album" placeholder="album"><br> 
+ 	<label for="length">length: </label><input type="number" id="length" placeholder="length"><br> 
+ 	<label for="plays">plays: </label><input type="number" id="plays" placeholder="plays"><br> 
+ 	<label for="path">path: </label><input type="text" id="path" placeholder="path"><br> 
+ </form> 
+ 
+ <button id="serialize">Serialize form values</button> 
+ <button id="getThem">Get Songs</button> 
+ <div id="json"></div> 
+ <div id="done"></div> 
+ <div id="songs"></div> 
+ </body> 
+ </html>
