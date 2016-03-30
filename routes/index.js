@@ -52,5 +52,16 @@ router.get('/song', function(req, res, next) {
 	})
 });
 
+var fs = require('fs');
+var mm = require('musicmetadata');
+
+router.get('/metadata',function(req,res,next) {
+
+	var parser = new mm(fs.createReadStream('/home/bitnami/htdocs/CS360/finalPro/public/songs/song1.flac'));
+	parser.on('metadata', function(result) {
+		console.log(result);
+		res.json(result);
+	});
+});
 
 module.exports = router;
