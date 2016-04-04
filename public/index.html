@@ -2,7 +2,7 @@
  <html> 
  <head> 
  <title>
-	 Comments!
+	 Music Server!
  </title> 
  <script src="https://code.jquery.com/jquery-1.10.2.js">
  </script> 
@@ -10,6 +10,15 @@
  </script> 
  </head> 
  <body> 
+
+<audio controls>
+  <!--<source src="horse.mp3" type="audio/mpeg">-->
+  <source src="/songs/song1.flac", type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<br>
+<br>
+
  <form id="songForm" action=""> 
 	<label for="track">track: </label><input type="number" id="track" placeholder="track"><br> 
  	<label for="title">title: </label><input type="text" id="title" placeholder="title"><br> 
@@ -31,8 +40,8 @@
      action    =  "/api/photo"
      method    =  "post"
  >
- <input type="file" name="userPhoto" />
- <input type="submit" value="Upload Image" name="submit">
+ <input type="file" name="userSong" />
+ <input type="submit" value="Upload Song" name="submit">
  </form>
 
  </body> 

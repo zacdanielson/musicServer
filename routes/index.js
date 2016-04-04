@@ -1,21 +1,37 @@
 var express = require('express');
 var multer  =   require('multer');
 var router = express.Router();
+var path = require('path');
+var fs = require('fs');
+var mm = require('musicmetadata');
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
     callback(null, './public/uploads');
   },
   filename: function (req, file, callback) {
-    callback(null, file.fieldname + '-' + Date.now());
+    //callback(null, file.fieldname + '-' + Date.now());
+    callback(null, "temp");
   }
 });
-var upload = multer({ storage : storage}).single('userPhoto');
+var upload = multer({ storage : storage}).single('userSong');
 // Upload Stuff (change location of upload folder eventually!)
 router.post('/api/photo',function(req,res){
     upload(req,res,function(err) {
-        if(err) {
+	if(err) {
             return res.end("Error uploading file.");
         }
+	var parser = mm(fs.createReadStream('public/uploads/temp'), function (err, metadata) {
+                  if (err) throw err;
+                  console.log(metadata);
+		  console.log(metadata.title);
+		  fs.rename('public/uploads/temp','public/uploads/' + metadata.title,function (err) {
+			if (err) throw err;
+			fs.stat('public/uploads/' + metadata.title, function (err, stats) {
+				if (err) throw err;
+				console.log('stats: ' + JSON.stringify(stats));
+			});
+		  });
+	});
         res.end("File is uploaded");
     });
 });
@@ -71,13 +87,13 @@ router.get('/song', function(req, res, next) {
 	})
 });
 
-var fs = require('fs');
-var mm = require('musicmetadata');
-
 router.get('/metadata',function(req,res,next) {
-	var parser = mm(fs.createReadStream('/home/bitnami/htdocs/CS360/finalPro/public/songs/1-01 Intro.mp3'), function (err, metadata) {
+	console.log("metadata stuff");
+	console.log("./ = %s", path.resolve("./"));
+	var parser = mm(fs.createReadStream('public/uploads/temp'), function (err, metadata) {
 		  if (err) throw err;
 		    console.log(metadata);
+		  console.log(metadata.title);
 	
 	});
 });
