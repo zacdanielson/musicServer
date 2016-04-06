@@ -40,7 +40,7 @@ angular.module('songServer', [])
 			var audio = document.getElementById('audio');
         		audio.load(); //call this to just preload the audio without playing
         		audio.play(); //call this to play the song right away
-			$scope.test = song.title;
+			$scope.test = song.title + " - " + song.artist;
 		};
 		$scope.getAll = function() {
 			console.log("inside the GETALL");
