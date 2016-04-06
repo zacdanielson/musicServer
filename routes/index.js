@@ -6,7 +6,7 @@ var fs = require('fs');
 var mm = require('musicmetadata');
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
-    callback(null, 'uploads');
+    callback(null, 'public/uploads');
   },
   filename: function (req, file, callback) {
     //callback(null, file.fieldname + '-' + Date.now());
@@ -50,7 +50,7 @@ router.post('/api/photo',function(req,res){
 		  
 		fs.rename('public/uploads/temp','public/uploads/' + metadata.title,function (err) {
 			if (err) throw err;
-			fs.stat('uploads/' + metadata.title, function (err, stats) {
+			fs.stat('public/uploads/' + metadata.title, function (err, stats) {
 				if (err) throw err;
 				console.log('stats: ' + JSON.stringify(stats));
 			});
@@ -69,7 +69,8 @@ router.post('/api/photo',function(req,res){
                 });
 
 	});
-        res.end("File is uploaded");
+        res.redirect("/");
+	//res.end("File is uploaded");
     });
 });
 
