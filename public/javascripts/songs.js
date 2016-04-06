@@ -30,4 +30,27 @@ $(document).ready(function(){
 
 });
 
+angular.module('songServer', [])
+.controller('MainCtrl', [
+	'$scope','$http',
+	function($scope, $http) {
+		$scope.songDB = [];
+		$scope.play = function(song) {
+			$scope.path = "/uploads/" + song.title;
+			var audio = document.getElementById('audio');
+        		audio.load(); //call this to just preload the audio without playing
+        		audio.play(); //call this to play the song right away
+			$scope.test = song.title;
+		};
+		$scope.getAll = function() {
+			console.log("inside the GETALL");
+			return $http.get('/song').success(function(data) {
+				angular.copy(data, $scope.songDB);
+			});
+		};
+		
+		$scope.getAll();
+	}]); 
+	
 
+	
